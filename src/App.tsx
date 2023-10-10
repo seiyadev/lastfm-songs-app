@@ -1,4 +1,6 @@
+import 'react-native-gesture-handler';
 import React from 'react';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {
@@ -37,44 +39,46 @@ function App(): JSX.Element {
   };
 
   return (
-    <Provider store={store}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={theme.colors.background}
-      />
-      <NavigationContainer theme={theme}>
-        <Stack.Navigator initialRouteName="HOME">
-          <Stack.Screen
-            name="HOME"
-            component={Home}
-            options={{
-              headerShown: false,
-              cardStyleInterpolator,
-            }}
-          />
-          <Stack.Screen
-            name="SONG"
-            component={Song}
-            options={{
-              headerShown: false,
-              cardStyleInterpolator,
-            }}
-          />
-          <Stack.Screen
-            name="PROFILE"
-            component={Profile}
-            options={{
-              title: '',
-              headerStyle: {
-                elevation: 0,
-              },
-              cardStyleInterpolator,
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-      <TrackPlayer />
-    </Provider>
+    <GestureHandlerRootView style={{flex: 1}}>
+      <Provider store={store}>
+        <StatusBar
+          barStyle={isDarkMode ? 'light-content' : 'dark-content'}
+          backgroundColor={theme.colors.background}
+        />
+        <NavigationContainer theme={theme}>
+          <Stack.Navigator initialRouteName="HOME">
+            <Stack.Screen
+              name="HOME"
+              component={Home}
+              options={{
+                headerShown: false,
+                cardStyleInterpolator,
+              }}
+            />
+            <Stack.Screen
+              name="SONG"
+              component={Song}
+              options={{
+                headerShown: false,
+                cardStyleInterpolator,
+              }}
+            />
+            <Stack.Screen
+              name="PROFILE"
+              component={Profile}
+              options={{
+                title: '',
+                headerStyle: {
+                  elevation: 0,
+                },
+                cardStyleInterpolator,
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+        {false && <TrackPlayer />}
+      </Provider>
+    </GestureHandlerRootView>
   );
 }
 
